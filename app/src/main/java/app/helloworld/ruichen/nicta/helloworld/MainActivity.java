@@ -25,6 +25,7 @@ import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,7 +39,11 @@ public class MainActivity extends FragmentActivity
         LocationListener,
         OnMyLocationButtonClickListener{
 
-    //private final LatLng LOCATION_NICTA_VIC = new LatLng(-37.811458,144.949231);
+    private final LatLng COORD_NICTA_VIC = new LatLng(-37.811458,144.949231);
+    private final LatLng COORD_UNIMELB = new LatLng(-37.796369,144.961174);
+    private final LatLng COORD_MELBCENTRAL = new LatLng(-37.810144, 144.962674);
+    private final LatLng COORD_REB = new LatLng(-37.804686,144.971649);
+
     private Location myLocation;
     private List<Address> addresses = null;
     private LatLng myLatLng;
@@ -71,7 +76,6 @@ public class MainActivity extends FragmentActivity
         mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
         // Add this line
         mMap.setMyLocationEnabled(true);
-
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -191,7 +195,7 @@ public class MainActivity extends FragmentActivity
             }
 
             // Return the text
-            mAddress.setText(addressText);
+            mAddress.setText("My address is " + addressText);
         }
     }
 
@@ -230,10 +234,41 @@ public class MainActivity extends FragmentActivity
         // Do nothing
     }
 
+
+    /*below are two onClick methods for buttons*/
     @Override
     public boolean onMyLocationButtonClick() {
         Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
         return false;
     }
 
+    public void onClick_routes(View view){
+
+        LatLng centroid = new LatLng( (
+                COORD_NICTA_VIC.latitude +
+                COORD_UNIMELB.latitude +
+                COORD_MELBCENTRAL.latitude +
+                COORD_REB.latitude)/4.0
+                ,
+                (COORD_NICTA_VIC.longitude +
+                        COORD_UNIMELB.longitude +
+                        COORD_MELBCENTRAL.longitude +
+                        COORD_REB.longitude )/4.0
+        );
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centroid, 14));
+
+        // Polylines are useful for marking paths and routes on the map.
+        mMap.addPolyline(new PolylineOptions().geodesic(true)
+                .add(COORD_NICTA_VIC)
+                .add(COORD_UNIMELB)
+                .add(COORD_MELBCENTRAL)
+                .add(COORD_REB)  // Royal Exhibition Building
+        );
+    }
+
+    public void onClick_reset(View view){
+        mMap.clear();
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(0.0,0.0), 2));
+    }
 }
