@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">My App</string>
+    <string name="app_name">Evacuation App</string>
     <string name="first_app">First App</string>
     <string name="my_location">My Location</string>
     <string name = "routes">Display Routes</string>

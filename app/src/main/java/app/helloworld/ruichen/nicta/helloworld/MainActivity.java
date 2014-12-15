@@ -268,6 +268,8 @@ public class MainActivity extends FragmentActivity
     }
 
     public void onClick_reset(View view){
+        mMessageView.setText("");
+        mAddress.setText("");
         mMap.clear();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(0.0,0.0), 2));
     }
