@@ -2,34 +2,34 @@
 <pre-dex-items>
 
     <item
-        dex="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-23ac29c83b0cda1d865531e05ca89479f3b4cf4a.jar"
+        dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/classes-be7163dda8bb7c0fc8686e011f2835c7d38b9b03.jar"
+        jar="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+    <item
+        dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/classes-6fd0faa41b4472ac5491ff6d907bccc3b005187c.jar"
+        jar="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.1.71/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="0f6d5c1ef2e982c3b7858408e3df389cf5d202da"/>
+    <item
+        dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-23ac29c83b0cda1d865531e05ca89479f3b4cf4a.jar"
         jar="/Users/ruichen/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
     <item
-        dex="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-d19daf5ac59f832a1ae37c3296a3758ee5af88e9.jar"
-        jar="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
-    <item
-        dex="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/pre-dexed/debug/classes-71a29d85ac6725d8ffcc32ae011fb0e50e6a4856.jar"
-        jar="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
-    <item
-        dex="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/pre-dexed/debug/classes-af110e4424f95f7a60d9a2a59c4405623bbef105.jar"
-        jar="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.1.71/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="0f6d5c1ef2e982c3b7858408e3df389cf5d202da"/>
-    <item
-        dex="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/pre-dexed/debug/classes-04cfb1d0e4fc369f141ba10ebcb41f88d1dcae8d.jar"
-        jar="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/classes.jar"
+        dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/classes-ae484ebb742e7ac28f301675f4cb6ce5ff4602c9.jar"
+        jar="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/classes.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="f21927d22fe31889ecce94dd697a2e75b137e0ef"/>
+    <item
+        dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-dc408e3d02f04f06b05218b2a178e96f5d2e45cc.jar"
+        jar="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
 
 </pre-dex-items>

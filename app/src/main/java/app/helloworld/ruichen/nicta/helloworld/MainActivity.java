@@ -1,10 +1,8 @@
 package app.helloworld.ruichen.nicta.helloworld;
 
-import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -40,15 +38,14 @@ public class MainActivity extends FragmentActivity
         LocationListener,
         OnMyLocationButtonClickListener{
 
-
-    private final LatLng LOCATION_NICTA_VIC = new LatLng(-37.811458,144.949231);
+    //private final LatLng LOCATION_NICTA_VIC = new LatLng(-37.811458,144.949231);
     private Location myLocation;
+    private List<Address> addresses = null;
     private LatLng myLatLng;
     private List<String> providersList = new ArrayList<String>();
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
     private TextView mMessageView;
-
 
     //Address Progress
     private TextView mAddress;
@@ -71,7 +68,7 @@ public class MainActivity extends FragmentActivity
         mActivityIndicator =
                 (ProgressBar) findViewById(R.id.address_progress);
         mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-        //mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
         // Add this line
         mMap.setMyLocationEnabled(true);
 
@@ -80,8 +77,6 @@ public class MainActivity extends FragmentActivity
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
-
-
     }
 
     protected void onStart() {
@@ -145,20 +140,57 @@ public class MainActivity extends FragmentActivity
      * without needing to register a LocationListener.
      */
     public void showMyLocation(View view) {
-
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             myLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             myLatLng = new LatLng(myLocation.getLatitude(),myLocation.getLongitude());
             String msg = "Location = "
                     + myLocation;
             Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-
-            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(myLatLng,16);
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(myLatLng,21);
             mMap.animateCamera(update);
             mMap.addMarker(new MarkerOptions()
                     .position(myLatLng)
                     .title("My Location").snippet("Some Address"));
+             Geocoder geocoder = new Geocoder(getBaseContext(), Locale.getDefault());
+            // Get the current location from the input parameter list
+            // Create a list to contain the result address
+            try {
+                addresses = geocoder.getFromLocation(myLocation.getLatitude(),
+                        myLocation.getLongitude(), 1);
+            } catch (IOException e1) {
+                addressText =  "LocationSampleActivity" +
+                        "IO Exception in getFromLocation()";
+                e1.printStackTrace();
+            } catch (IllegalArgumentException e2) {
+                // Error message to post in the log
+                String errorString = "Illegal arguments " +
+                        Double.toString(myLocation.getLatitude()) +
+                        " , " +
+                        Double.toString(myLocation.getLongitude()) +
+                        " passed to address service";
+                Log.e("LocationSampleActivity", errorString);
+                e2.printStackTrace();
+                addressText = "Illegal Argument Exception: Couldn't find address";
 
+            }
+            // If the reverse geocode returned an address
+            if (addresses != null && addresses.size() > 0 ) {
+                Address address = addresses.get(0);
+                addressText = String.format(
+                        "%s, %s, %s",
+                        // If there's a street address, add it
+                        address.getMaxAddressLineIndex() > 0 ?
+                                address.getAddressLine(0) : "",
+                        // Locality is usually a city
+                        address.getLocality(),
+                        // The country of the address
+                        address.getCountryName());
+            }
+            else {
+                addressText += "address = null";
+            }
+
+            // Return the text
             mAddress.setText(addressText);
         }
     }
@@ -202,82 +234,6 @@ public class MainActivity extends FragmentActivity
     public boolean onMyLocationButtonClick() {
         Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
         return false;
-    }
-
-
-
-
-    private class GetAddressTask extends
-            AsyncTask<Location, Void, String> {
-        Context mContext;
-
-        public GetAddressTask(Context context) {
-            super();
-            mContext = context;
-        }
-
-        /**
-         * Get a Geocoder instance, get the latitude and longitude
-         * look up the address, and return it
-         *
-         * @return A string containing the address of the current
-         * location, or an empty string if no address can be found,
-         * or an error message
-         * @params params One or more Location objects
-         */
-        @Override
-        protected String doInBackground(Location... params) {
-            Geocoder geocoder =
-                    new Geocoder(mContext, Locale.getDefault());
-            // Get the current location from the input parameter list
-            Location loc = params[0];
-            // Create a list to contain the result address
-            List<Address> addresses = null;
-            try {
-                /*
-                 * Return 1 address.
-                 */
-                addresses = geocoder.getFromLocation(loc.getLatitude(),
-                        loc.getLongitude(), 1);
-            } catch (IOException e1) {
-                Log.e("LocationSampleActivity",
-                        "IO Exception in getFromLocation()");
-                e1.printStackTrace();
-                return ("IO Exception trying to get address");
-            } catch (IllegalArgumentException e2) {
-                // Error message to post in the log
-                String errorString = "Illegal arguments " +
-                        Double.toString(loc.getLatitude()) +
-                        " , " +
-                        Double.toString(loc.getLongitude()) +
-                        " passed to address service";
-                Log.e("LocationSampleActivity", errorString);
-                e2.printStackTrace();
-                return errorString;
-            }
-            // If the reverse geocode returned an address
-            if (addresses != null && addresses.size() > 0) {
-                // Get the first address
-                Address address = addresses.get(0);
-                /*
-                 * Format the first line of address (if available),
-                 * city, and country name.
-                 */
-                addressText += String.format(
-                        "%s, %s, %s",
-                        // If there's a street address, add it
-                        address.getMaxAddressLineIndex() > 0 ?
-                                address.getAddressLine(0) : "",
-                        // Locality is usually a city
-                        address.getLocality(),
-                        // The country of the address
-                        address.getCountryName());
-                // Return the text
-                return addressText;
-            } else {
-                return "No address found";
-            }
-        }
     }
 
 }
