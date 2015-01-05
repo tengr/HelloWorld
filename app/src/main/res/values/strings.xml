@@ -12,5 +12,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_notifications">Notifications</string>
     <string name="action_main">Routes</string>
+    <string name="send">Send</string>
+    <string name="clear">Clear</string>
 
 </resources>
