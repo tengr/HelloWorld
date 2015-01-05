@@ -14,9 +14,9 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <permission android:name="com.example.gcm.permission.C2D_MESSAGE"
+    <permission android:name="app.helloworld.ruichen.nicta.helloworld.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE" />
+    <uses-permission android:name="app.helloworld.ruichen.nicta.helloworld.permission.C2D_MESSAGE" />
 
 
     <uses-feature
@@ -47,7 +47,7 @@
             android:value="AIzaSyC7VjLY5rikI_grzf-dPiTaQPlAVhfr2CI" />
 
         <activity
-            android:name="app.helloworld.ruichen.nicta.helloworld.Notifications"
+            android:name=".RouteNotification"
             android:label="@string/title_activity_notifications"
             android:parentActivityName="app.helloworld.ruichen.nicta.helloworld.MainActivity" >
             <meta-data

@@ -294,7 +294,7 @@ public class MainActivity extends ActionBarActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_notifications) {
-            Intent intent = new Intent(this, Notifications.class);
+            Intent intent = new Intent(this, RouteNotification.class);
             startActivity(intent);
             return true;
         }
