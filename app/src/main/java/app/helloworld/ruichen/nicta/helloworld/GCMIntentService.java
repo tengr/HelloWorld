@@ -40,6 +40,8 @@ public class GcmIntentService extends IntentService {
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
 
+    private int notificationCounter = 0;
+
     public GcmIntentService() {
         super("GcmIntentService");
     }
@@ -96,8 +98,8 @@ public class GcmIntentService extends IntentService {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.logo_nicta_org_nobg)
-                        .setContentTitle("GCM Notification")
+                        .setSmallIcon(R.drawable.logo_nicta_org_nobg    )
+                        .setContentTitle("Evacuation Notification" + (notificationCounter++))
                         .setStyle(new NotificationCompat.BigTextStyle()
                                 .bigText(msg))
                         .setContentText(msg);

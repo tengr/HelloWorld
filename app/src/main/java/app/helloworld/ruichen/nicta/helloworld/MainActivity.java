@@ -207,7 +207,7 @@ public class MainActivity extends ActionBarActivity
      */
     @Override
     public void onLocationChanged(Location location) {
-        mMessageView.setText("Location = " + location);
+        //mMessageView.setText("Location = " + location);
     }
 
     /**
