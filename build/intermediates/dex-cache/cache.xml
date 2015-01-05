@@ -1,59 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<pre-dex-items>
+<items version="2" >
 
     <item
-        dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/classes-1c72942a7e70b2b7200a9bddbed788b3d8604657.jar"
-        jar="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
-        jumboMode="false"
-        revision="21.0.0"
-        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256"/>
-    <item
-        dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/classes-0208678fdd7eff67b3912d6d3b7845d8da191b45.jar"
-        jar="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/classes.jar"
-        jumboMode="false"
-        revision="21.0.0"
-        sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3"/>
-    <item
-        dex="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-1b666b3b448cb5b5556229cf27f7c7fb8d9e37d1.jar"
-        jar="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/libs/internal_impl-21.0.2.jar"
-        jumboMode="false"
-        revision="21.0.0"
-        sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f"/>
-    <item
-        dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-859dad6d2ec757346181eb65af8fda732deca62f.jar"
         jar="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/libs/internal_impl-21.0.2.jar"
         jumboMode="false"
         revision="21.0.0"
-        sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f"/>
+        sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f">
+        <dex dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-859dad6d2ec757346181eb65af8fda732deca62f.jar" />
+    </item>
     <item
-        dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/classes-a0d8c0c659dae9c83e2269f7974962ec565428f7.jar"
         jar="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/classes.jar"
         jumboMode="false"
         revision="21.0.0"
-        sha1="7ae2d38807a43b2f2185ff4089a92c790b579e54"/>
+        sha1="7ae2d38807a43b2f2185ff4089a92c790b579e54">
+        <dex dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/classes-a0d8c0c659dae9c83e2269f7974962ec565428f7.jar" />
+    </item>
     <item
-        dex="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/pre-dexed/debug/classes-6571b5771ed419f46eeb7668ef8f4a474e581f07.jar"
-        jar="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/classes.jar"
+        jar="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/classes.jar"
         jumboMode="false"
         revision="21.0.0"
-        sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3"/>
+        sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3">
+        <dex dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/classes-0208678fdd7eff67b3912d6d3b7845d8da191b45.jar" />
+    </item>
     <item
-        dex="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/pre-dexed/debug/classes-622e68311dc6f4d420d2a6fdfb31a42ab5f3e846.jar"
-        jar="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
+        jar="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
         jumboMode="false"
         revision="21.0.0"
-        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256"/>
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/classes-1c72942a7e70b2b7200a9bddbed788b3d8604657.jar" />
+    </item>
     <item
-        dex="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/pre-dexed/debug/classes-05a2a7cb768316175aad9e5c214a3287b4137bfe.jar"
-        jar="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/classes.jar"
-        jumboMode="false"
-        revision="21.0.0"
-        sha1="7ae2d38807a43b2f2185ff4089a92c790b579e54"/>
-    <item
-        dex="/Users/ruichen/AndroidStudioProjects/HelloWorld/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-82d8a57f2acff140c10bec50e6ed8ae0c164d950.jar"
         jar="/Users/ruichen/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.2/support-annotations-21.0.2.jar"
         jumboMode="false"
         revision="21.0.0"
-        sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6"/>
+        sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6">
+        <dex dex="/Users/ruichen/AndroidStudioProjects/org-evacapp-ruichen/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-82d8a57f2acff140c10bec50e6ed8ae0c164d950.jar" />
+    </item>
 
-</pre-dex-items>
+</items>
