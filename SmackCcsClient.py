@@ -49,7 +49,10 @@ def message_callback(session, message):
         else: 
           send_queue.append({'to': msg['from'],
                            'message_id': random_id(),
-                           'data': {'not moving': 1}})
+                           'data': {'latitude': lats[-1] + 10,
+                                    'longtitude': longs[-1] + 10
+                                    }
+                            })
     elif msg['message_type'] == 'ack' or msg['message_type'] == 'nack':
       unacked_messages_quota += 1
 

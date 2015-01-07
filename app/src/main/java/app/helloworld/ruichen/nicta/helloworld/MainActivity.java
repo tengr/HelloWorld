@@ -84,6 +84,23 @@ public class MainActivity extends ActionBarActivity
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
+
+        Bundle extras = getIntent().getExtras();
+
+        if(extras != null && extras.containsKey("latitude")) {
+            LatLng addedMarker = new LatLng(Double.parseDouble(extras.get("latitude").toString()),
+                    Double.parseDouble(extras.get("longtitude").toString()));
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(addedMarker,14);
+            mMap.animateCamera(update);
+            mMap.addMarker(new MarkerOptions()
+                    .position(addedMarker)
+                    .title("addedMarker").snippet("New Marker"));
+        }
+
+
+
+
+
     }
 
     protected void onStart() {
@@ -108,6 +125,7 @@ public class MainActivity extends ActionBarActivity
         setUpMapIfNeeded();
         setUpGoogleApiClientIfNeeded();
         mGoogleApiClient.connect();
+
     }
 
     @Override

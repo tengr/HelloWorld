@@ -39,6 +39,7 @@ public class GcmIntentService extends IntentService {
     public static final int NOTIFICATION_ID = 1;
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
+    private Bundle passExtra = null;
 
     private int notificationCounter = 0;
 
@@ -50,6 +51,7 @@ public class GcmIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Bundle extras = intent.getExtras();
+        passExtra = extras;
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
         // The getMessageType() intent parameter must be the intent you received
         // in your BroadcastReceiver.
@@ -81,8 +83,9 @@ public class GcmIntentService extends IntentService {
                 sendNotification("Received: " + extras.toString());
 
                 Log.i(TAG, "Received: " + extras.toString());
-                if (extras.containsKey("not moving"))
-                Log.i(TAG, "Parsing: " + extras.get("not moving").toString());
+                if (extras.containsKey("latitude"))
+                Log.i(TAG, "New Latitude: " + extras.get("latitude").toString()
+                    + "\tNew Longtitude: " + extras.get("longtitude").toString());
             }
         }
         // Release the wake lock provided by the WakefulBroadcastReceiver.
@@ -95,9 +98,13 @@ public class GcmIntentService extends IntentService {
     private void sendNotification(String msg) {
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
-
+        Intent in = new Intent(this,MainActivity.class);
+        if(passExtra != null && passExtra.containsKey("latitude")) {
+            in.putExtra("latitude", passExtra.get("latitude").toString());
+            in.putExtra("longtitude", passExtra.get("longtitude").toString());
+        }
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, RouteNotification.class), 0);
+               in, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
