@@ -79,7 +79,10 @@ public class GcmIntentService extends IntentService {
                 Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
                 // Post notification of received message.
                 sendNotification("Received: " + extras.toString());
+
                 Log.i(TAG, "Received: " + extras.toString());
+                if (extras.containsKey("not moving"))
+                Log.i(TAG, "Parsing: " + extras.get("not moving").toString());
             }
         }
         // Release the wake lock provided by the WakefulBroadcastReceiver.

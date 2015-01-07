@@ -2,7 +2,7 @@
 import sys, json, xmpp, random, string
 
 SERVER = 'gcm.googleapis.com'
-PORT = 5235
+PORT = 5236
 #USERNAME = "Your GCM Sender Id"
 USERNAME = "22601053657"
 PASSWORD = "AIzaSyAyeqel0T5wicjpNIWzZ9s1yDSytZZNwHM"
@@ -10,7 +10,9 @@ REGISTRATION_ID = "Registration Id of the target device"
 
 unacked_messages_quota = 100
 send_queue = []
-
+lats = []
+longs = []
+moving = True;
 # Return a random alphanumerical id
 def random_id():
   rid = ''
@@ -24,6 +26,15 @@ def message_callback(session, message):
     gcm_json = gcm[0].getData()
     msg = json.loads(gcm_json)
     if not msg.has_key('message_type'):
+      if msg.has_key('data'):
+        lats.append(float(msg['data']['latitude']))
+        longs.append(float(msg['data']['longtitude']))
+        print 'latitude:' + msg['data']['latitude'] + 'longtitude' + msg['data']['longtitude']
+        if len(lats) > 1 and (lats[-1] - lats[-2]) ** 2 + (longs[-1] - longs[-1]) ** 2 < 0.0001:
+          moving = False
+          print 'Not Moving!'
+        else:
+          moving = True
       # Acknowledge the incoming message immediately.
       send({'to': msg['from'],
             'message_type': 'ack',
@@ -31,9 +42,14 @@ def message_callback(session, message):
       # Queue a response back to the server.
       if msg.has_key('from'):
         # Send a dummy echo response back to the app that sent the upstream message.
-        send_queue.append({'to': msg['from'],
+        if moving:
+          send_queue.append({'to': msg['from'],
                            'message_id': random_id(),
-                           'data': {'pong': 1}})
+                           'data': {'moving': 1}})
+        else: 
+          send_queue.append({'to': msg['from'],
+                           'message_id': random_id(),
+                           'data': {'not moving': 1}})
     elif msg['message_type'] == 'ack' or msg['message_type'] == 'nack':
       unacked_messages_quota += 1
 

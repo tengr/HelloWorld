@@ -292,9 +292,8 @@ public class RouteNotification extends Activity
                 try {
                     Bundle data = new Bundle();
                     Location loc = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-                    data.putString("my_message", "" + loc.getLatitude()
-                            + "," + loc.getLongitude() +
-                            "," + (locationTracker++));
+                    data.putString("latitude", "" + loc.getLatitude());
+                    data.putString("longtitude","" + loc.getLongitude());
                     data.putString("my_action", "com.google.android.gcm.demo.app.ECHO_NOW");
                     String id = Integer.toString(msgId.incrementAndGet());
                     gcm.send(SENDER_ID + "@gcm.googleapis.com", id, data);
