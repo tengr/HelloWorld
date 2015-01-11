@@ -2,13 +2,13 @@
 import sys, json, xmpp, random, string
 
 SERVER = 'gcm.googleapis.com'
-PORT = 5236
+PORT = 5237
 #USERNAME = "Your GCM Sender Id"
 USERNAME = "22601053657"
 PASSWORD = "AIzaSyAyeqel0T5wicjpNIWzZ9s1yDSytZZNwHM"
 REGISTRATION_ID = "Registration Id of the target device"
 
-unacked_messages_quota = 100
+unacked_messages_quota = sys.maxint
 send_queue = []
 lats = []
 longs = []
@@ -29,7 +29,7 @@ def message_callback(session, message):
       if msg.has_key('data'):
         lats.append(float(msg['data']['latitude']))
         longs.append(float(msg['data']['longtitude']))
-        print 'latitude:' + msg['data']['latitude'] + 'longtitude' + msg['data']['longtitude']
+        print 'latitude:' + msg['data']['latitude'] + "\tlongtitude" + msg['data']['longtitude']
         if len(lats) > 1 and (lats[-1] - lats[-2]) ** 2 + (longs[-1] - longs[-1]) ** 2 < 0.0001:
           moving = False
           print 'Not Moving!'
@@ -49,8 +49,8 @@ def message_callback(session, message):
         else: 
           send_queue.append({'to': msg['from'],
                            'message_id': random_id(),
-                           'data': {'latitude': lats[-1] + 10,
-                                    'longtitude': longs[-1] + 10
+                           'data': {'latitude': -37.796369,
+                                    'longtitude': 144.961174
                                     }
                             })
     elif msg['message_type'] == 'ack' or msg['message_type'] == 'nack':

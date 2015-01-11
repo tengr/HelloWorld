@@ -90,16 +90,11 @@ public class MainActivity extends ActionBarActivity
         if(extras != null && extras.containsKey("latitude")) {
             LatLng addedMarker = new LatLng(Double.parseDouble(extras.get("latitude").toString()),
                     Double.parseDouble(extras.get("longtitude").toString()));
-            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(addedMarker,14);
-            mMap.animateCamera(update);
-            mMap.addMarker(new MarkerOptions()
-                    .position(addedMarker)
-                    .title("addedMarker").snippet("New Marker"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addedMarker, 14));
+            mMap.addPolyline(new PolylineOptions().geodesic(true)
+                            .add(addedMarker)
+            );
         }
-
-
-
-
 
     }
 
