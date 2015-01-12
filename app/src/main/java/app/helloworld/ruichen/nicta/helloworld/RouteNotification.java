@@ -184,6 +184,7 @@ public class RouteNotification extends Activity
                     }
                     regid = gcm.register(SENDER_ID);
                     msg = "Device registered, registration ID=" + regid;
+                    Log.i(TAG,regid);
 
                     // You should send the registration ID to your server over HTTP, so it
                     // can use GCM/HTTP or CCS to send messages to your app.
