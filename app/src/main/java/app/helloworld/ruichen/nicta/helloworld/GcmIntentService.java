@@ -109,7 +109,7 @@ public class GcmIntentService extends IntentService {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.logo_nicta_org_nobg    )
-                        .setContentTitle("Evacuation Notification" + (notificationCounter++))
+                        .setContentTitle("Evacuation Notification No." + (notificationCounter++))
                         .setStyle(new NotificationCompat.BigTextStyle()
                                 .bigText(msg))
                         .setContentText(msg);

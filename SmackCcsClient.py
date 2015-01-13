@@ -1,8 +1,8 @@
 #!/usr/bin/python
-import sys, json, xmpp, random, string
+import os, sys, json, xmpp, random, string
 
 SERVER = 'gcm.googleapis.com'
-PORT = 5237
+PORT = 5235
 #USERNAME = "Your GCM Sender Id"
 USERNAME = "22601053657"
 PASSWORD = "AIzaSyAyeqel0T5wicjpNIWzZ9s1yDSytZZNwHM"
@@ -25,6 +25,8 @@ def message_callback(session, message):
   if gcm:
     gcm_json = gcm[0].getData()
     msg = json.loads(gcm_json)
+    print "msg is "
+    print msg
     if not msg.has_key('message_type'):
       if msg.has_key('data'):
         lats.append(float(msg['data']['latitude']))
@@ -39,22 +41,29 @@ def message_callback(session, message):
       send({'to': msg['from'],
             'message_type': 'ack',
             'message_id': msg['message_id']})
+      print "sent ack"
       # Queue a response back to the server.
       if msg.has_key('from'):
         # Send a dummy echo response back to the app that sent the upstream message.
         if moving:
           send_queue.append({'to': msg['from'],
                            'message_id': random_id(),
-                           'data': {'moving': 1}})
+                           'data': {'moving': "True"}})
         else: 
           send_queue.append({'to': msg['from'],
                            'message_id': random_id(),
-                           'data': {'latitude': -37.796369,
-                                    'longtitude': 144.961174
+                           'data': {'latitude': "-37.796369",
+                                    'longtitude': "144.961174"
                                     }
                             })
+      else:
+        print "Message missing key \"from\""
     elif msg['message_type'] == 'ack' or msg['message_type'] == 'nack':
       unacked_messages_quota += 1
+      print "message_type received"
+      print msg['message_type']
+  else:
+    print "GCM Problem!"
 
 def send(json_dict):
   template = ("<message><gcm xmlns='google:mobile:data'>{1}</gcm></message>")

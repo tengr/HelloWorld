@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -53,7 +54,7 @@ public class RouteNotification extends Activity
     /**
      * Tag used on log messages.
      */
-    static final String TAG = "GCM Demo";
+    static final String TAG = "Evacuation App";
 
     TextView mDisplay;
     GoogleCloudMessaging gcm;
@@ -76,9 +77,10 @@ public class RouteNotification extends Activity
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
 
-            if (regid.isEmpty()) {
+            //if (regid.isEmpty()) {
                 registerInBackground();
-            }
+                sendRegistrationIdToBackend();
+            //}
         } else {
             Log.i(TAG, "No valid Google Play Services APK found.");
         }
@@ -91,6 +93,8 @@ public class RouteNotification extends Activity
         checkPlayServices();
         setUpGoogleApiClientIfNeeded();
         mGoogleApiClient.connect();
+        registerInBackground();
+        sendRegistrationIdToBackend();
     }
 
     private void setUpGoogleApiClientIfNeeded() {
@@ -155,6 +159,9 @@ public class RouteNotification extends Activity
             Log.i(TAG, "Registration not found.");
             return "";
         }
+        else {
+            Log.i(TAG, "Registration found " + registrationId);
+        }
         // Check if app was updated; if so, it must clear the registration ID
         // since the existing regID is not guaranteed to work with the new
         // app version.
@@ -183,8 +190,8 @@ public class RouteNotification extends Activity
                         gcm = GoogleCloudMessaging.getInstance(context);
                     }
                     regid = gcm.register(SENDER_ID);
-                    msg = "Device registered, registration ID=" + regid;
-                    Log.i(TAG,regid);
+                    msg = "Device registered, registration ID= " + regid;
+                    Log.i(TAG, "Registration ID = " + regid);
 
                     // You should send the registration ID to your server over HTTP, so it
                     // can use GCM/HTTP or CCS to send messages to your app.
@@ -195,7 +202,7 @@ public class RouteNotification extends Activity
                     // 'from' address in the message.
 
                     // Persist the regID - no need to register again.
-                    storeRegistrationId(context, regid);
+                    //storeRegistrationId(context, regid);
                 } catch (IOException ex) {
                     msg = "Error :" + ex.getMessage();
                     // If there is an error, don't just keep trying to register.
@@ -222,7 +229,7 @@ public class RouteNotification extends Activity
                     try {
                         Bundle data = new Bundle();
                         data.putString("my_message", "Ruichen Teng");
-                        data.putString("my_action", "com.google.android.gcm.demo.app.ECHO_NOW");
+                        data.putString("my_action", "app.helloworld.ruichen.nicta.helloworld.ECHO_NOW");
                         String id = Integer.toString(msgId.incrementAndGet());
                         gcm.send(SENDER_ID + "@gcm.googleapis.com", id, data);
                         msg = "Sent message";
@@ -277,6 +284,38 @@ public class RouteNotification extends Activity
      */
     private void sendRegistrationIdToBackend() {
         // Your implementation here.
+
+        Log.i(TAG, "REGISTER USERID: " + regid);
+        String name = "whatever";
+        new AsyncTask<String, Void, String>()
+        {
+            @Override
+            protected String doInBackground(String... params)
+            {
+                String msg = "";
+                try
+                {
+                    Bundle data = new Bundle();
+                    data.putString("name", params[0]);
+                    data.putString("my_action", "app.helloworld.ruichen.nicta.helloworld.REGISTRATION");
+                    String id = Integer.toString(msgId.incrementAndGet());
+                    gcm.send(SENDER_ID + "@gcm.googleapis.com", id, 60L * 60L * 24L * 7L * 4L, data);
+                    msg = "Sent registration";
+                    Log.i(TAG, "registration sent");
+                }
+                catch (IOException ex)
+                {
+                    msg = "Error :" + ex.getMessage();
+                }
+                return msg;
+            }
+
+            @Override
+            protected void onPostExecute(String msg)
+            {
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+            }
+        }.execute(name);
     }
 
 
@@ -295,9 +334,9 @@ public class RouteNotification extends Activity
                     Location loc = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
                     data.putString("latitude", "" + loc.getLatitude());
                     data.putString("longtitude","" + loc.getLongitude());
-                    data.putString("my_action", "com.google.android.gcm.demo.app.ECHO_NOW");
+                    data.putString("my_action", "app.helloworld.ruichen.nicta.helloworld.ECHO_NOW");
                     String id = Integer.toString(msgId.incrementAndGet());
-                    gcm.send(SENDER_ID + "@gcm.googleapis.com", id, data);
+                    gcm.send(SENDER_ID + "@gcm.googleapis.com", id, 60L * 60L * 24L * 7L * 4L, data);
                     msg = "Sent message";
                 } catch (IOException ex) {
                     msg = "Error :" + ex.getMessage();

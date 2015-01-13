@@ -86,12 +86,12 @@ public class MainActivity extends ActionBarActivity
                 .build();
 
         Bundle extras = getIntent().getExtras();
-
         if(extras != null && extras.containsKey("latitude")) {
             LatLng addedMarker = new LatLng(Double.parseDouble(extras.get("latitude").toString()),
                     Double.parseDouble(extras.get("longtitude").toString()));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addedMarker, 14));
             mMap.addPolyline(new PolylineOptions().geodesic(true)
+                            .add(COORD_NICTA_VIC)
                             .add(addedMarker)
             );
         }
